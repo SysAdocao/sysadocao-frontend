@@ -1,13 +1,15 @@
 import { Outlet } from 'react-router-dom'
+import Header from '../../components/Header'
+import { Box, Container } from '@mui/material'
 
 function AppLayout() {
   return (
-    <>
-      <h1>App Layout</h1>
-      <div>
+    <Box component="section" sx={{ display: "flex" }}>
+      <Header />
+      <Container>
           <Outlet />
-      </div>
-    </>
+      </Container>
+    </Box>
   )
 }
 

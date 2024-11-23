@@ -1,12 +1,12 @@
 import { createTheme } from "@mui/material"
-import { blue, orange } from "@mui/material/colors"
+import { cyan, orange } from "@mui/material/colors"
 
 export const LightTheme = createTheme({
     pallete: {
         primary: {
-            main: blue[500],
-            dark: blue[700],
-            light: blue[300],
+            main: cyan[500],
+            dark: cyan[700],
+            light: cyan[300],
             constrastText: "#fff",
         },
         secondary: {
@@ -19,5 +19,14 @@ export const LightTheme = createTheme({
             default: "#f5f5f5",
             paper: "#fff",
         },
-    }
+    },
+    components: {
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    color: "#fff",
+                },
+            },
+        }
+    },
 })

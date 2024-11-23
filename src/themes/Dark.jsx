@@ -3,6 +3,7 @@ import { blue, orange } from "@mui/material/colors"
 
 export const DarkTheme = createTheme({
     pallete: {
+        mode: "dark",
         primary: {
             main: blue[500],
             dark: blue[700],
@@ -19,5 +20,19 @@ export const DarkTheme = createTheme({
             default: "#333",
             paper: "#444",
         },
-    }
+    },
+    typography: {
+        allVariants: {
+            color: "#fff",
+        },
+    },
+    components: {
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    color: "#fff",
+                },
+            },
+        }
+    },
 })

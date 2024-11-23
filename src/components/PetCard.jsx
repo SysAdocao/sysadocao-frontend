@@ -12,8 +12,8 @@ function PetCard({ pet }) {
   };
 
   return (
-    <Card sx={{ width: "100%", maxWidth: 345 }}>
-      <CardActionArea onClick={handleClick}>
+    <Card sx={{ width: "100%", maxWidth: 364, height: 261 }}>
+      <CardActionArea sx={{ height: 261 }} onClick={handleClick}>
         <CardMedia
             component="img"
             height="140"
@@ -27,7 +27,7 @@ function PetCard({ pet }) {
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             Espécie: {pet.species}
           </Typography>
-          <Typography variant="body2" sx={{ mt: 1, color: 'text.secondary' }}>
+          <Typography noWrap variant="body2" sx={{ mt: 1, color: 'text.secondary' }}>
             {pet.description}
           </Typography>
         </CardContent>

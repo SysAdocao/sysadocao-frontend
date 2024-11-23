@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import { api } from "@/lib/axios";
 
 const AuthContext = createContext();
 
@@ -11,8 +11,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("jwtToken");
       if (token) {
         try {
-          // posteriormente utilizar variáveis de ambiente para a URL
-          const response = await axios.get("http://localhost:3000/validate-token", { 
+          const response = await api.get("/validate-token", { 
             headers: { Authorization: `Bearer ${token}` },
           });
           setIsLogged(true);

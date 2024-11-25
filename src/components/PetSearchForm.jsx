@@ -44,7 +44,7 @@ const PetSearchForm = ({ onSearch }) => {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ display: "flex", flexDirection: "row", gap: 2 }}
+      sx={{ display: "flex", flexDirection: "row", gap: 2, paddingY: 1 }}
     >
       <TextField
         label="Nome"
@@ -66,6 +66,7 @@ const PetSearchForm = ({ onSearch }) => {
         <InputLabel id="size-label">Tamanho</InputLabel>
         <Select
           labelId="size-label"
+          label="Tamanho"
           name="size"
           value={filters.size}
           onChange={handleInputChange}

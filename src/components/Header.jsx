@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
+
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
@@ -8,10 +9,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 
 import Logo from "../assets/logo.png";
-import Avatar from "@mui/material/Avatar";
+import AvatarMenu from "./MenuDropdown";
 
 function Header() {
-  const { isLogged, userName, handleLogout } = useAuth();
+  const { isLogged } = useAuth();
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -33,31 +34,44 @@ function Header() {
             {isLogged ? (
               <>
                 <Link to={"/pets"}>
-                  <Button sx={{ color: "white" }}>Pets</Button>
+                  <Button sx={{
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)"
+                    }
+                  }}>Pets</Button>
                 </Link>
                 {/* Configurar favoritos posteriormente */}
                 <Link to={"/pets"}>
-                  <Button sx={{ color: "white" }}>Favoritos</Button>
+                  <Button sx={{
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)"
+                    }
+                  }}>Favoritos</Button>
                 </Link>
-                <Avatar sx={{ cursor: "pointer", ml: ".5rem"}} onClick={handleLogout}>
-                  {userName
-                    .split(" ")
-                    .slice(0, 2)
-                    .map((name) => name[0])
-                    .join("")
-                    .toUpperCase()}
-                </Avatar>
+                <AvatarMenu />
               </>
             ) : (
               <>
                 <Link to={"/sign-up"}>
-                  <Button sx={{ color: "white" }}>Cadastrar</Button>
+                  <Button sx={{
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)"
+                    }
+                  }}>Cadastrar</Button>
                 </Link>
                 <Link to={"/sign-in"}>
-                  <Button sx={{ fontWeight: "bold", color: "white" }}>Entrar</Button>
+                  <Button sx={{
+                    fontWeight: "bold",
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)"
+                    }
+                  }}>Entrar</Button>
                 </Link>
               </>
-              
             )}
           </Box>
         </Toolbar>

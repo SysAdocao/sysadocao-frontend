@@ -21,7 +21,11 @@ function SignIn() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/login", { email, password });
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:3000/login",
+        data: { email, password }
+      });
 
       // Chama a função de login do contexto para atualizar o estado global
       await login(response.data.token);

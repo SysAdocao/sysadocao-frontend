@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
   
-    const login = async (id, token) => {
+    const login = async (token) => {
       localStorage.setItem("jwtToken", token);
       await validateToken(); // Valida o token e atualiza o estado global
     };

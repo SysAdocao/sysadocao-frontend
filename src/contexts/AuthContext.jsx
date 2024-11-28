@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "@/lib/axios";
+import axios, { Axios } from "axios";
 
 const AuthContext = createContext();
 
@@ -32,6 +33,35 @@ export const AuthProvider = ({ children }) => {
       await validateToken(); // Valida o token e atualiza o estado global
     };
   
+    const register = async (name, email, password, role, phone, address) => {
+    try {
+      await axios({
+        method: "post",
+        url: "http://localhost:3000/users",
+        data: {
+          name: name,
+          email: email,
+          password: password,
+          role: role,
+          phone: phone,
+          address: address,
+          // {
+          //   "street": "Rua Alguma",
+          //   "number": "1231245123",
+          //   "neighborhood": "Centro",
+          //   "city": "Rio de Janeiro",
+          //   "state": "Rio de Janeiro",
+          //   "zipCode": "63030-390",
+          //   "complement": "Condominio" }
+        },
+      });
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "Cadastro falhou. Tente novamente.";
+      throw new Error(errorMessage);
+    }
+  };
+  
     const handleLogout = () => {
       localStorage.removeItem("jwtToken");
       setIsLogged(false);
@@ -43,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
   
     return (
-      <AuthContext.Provider value={{ isLogged, userName, userId, userRole, handleLogout, login }}>
+      <AuthContext.Provider value={{ isLogged, userName, userId, userRole, handleLogout, login, register }}>
         {children}
       </AuthContext.Provider>
     );

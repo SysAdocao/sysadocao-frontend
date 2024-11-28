@@ -6,6 +6,8 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [isLogged, setIsLogged] = useState(false);
     const [userName, setUserName] = useState("");
+    const [userId, setUserId] = useState("");
+    const [userRole, setUserRole] = useState("");
   
     const validateToken = async () => {
       const token = localStorage.getItem("jwtToken");
@@ -16,6 +18,8 @@ export const AuthProvider = ({ children }) => {
           });
           setIsLogged(true);
           setUserName(response.data.name);
+          setUserId(response.data.id);
+          setUserRole(response.data.role);
         } catch {
           setIsLogged(false);
           localStorage.removeItem("jwtToken");
@@ -23,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
   
-    const login = async (token) => {
+    const login = async (id, token) => {
       localStorage.setItem("jwtToken", token);
       await validateToken(); // Valida o token e atualiza o estado global
     };
@@ -39,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
   
     return (
-      <AuthContext.Provider value={{ isLogged, userName, handleLogout, login }}>
+      <AuthContext.Provider value={{ isLogged, userName, userId, userRole, handleLogout, login }}>
         {children}
       </AuthContext.Provider>
     );

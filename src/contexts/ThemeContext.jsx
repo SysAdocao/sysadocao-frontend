@@ -21,7 +21,7 @@ export const AppThemeProvider = ({ children }) => {
     return (
         <ThemeContext.Provider value={{themeName, toggleTheme}}>
             <ThemeProvider theme={theme}>
-                <Box width={"100vw"} minHeight={"100vh"} bgcolor={theme.pallete.background.default}>
+                <Box maxWidth={"100vw"} minHeight={"100vh"} bgcolor={theme.pallete.background.default}>
                     {children}
                 </Box>
             </ThemeProvider>

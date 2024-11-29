@@ -44,15 +44,7 @@ export const AuthProvider = ({ children }) => {
           password: password,
           role: role,
           phone: phone,
-          address: address,
-          // {
-          //   "street": "Rua Alguma",
-          //   "number": "1231245123",
-          //   "neighborhood": "Centro",
-          //   "city": "Rio de Janeiro",
-          //   "state": "Rio de Janeiro",
-          //   "zipCode": "63030-390",
-          //   "complement": "Condominio" }
+          address: address
         },
       });
     } catch (error) {
@@ -61,7 +53,29 @@ export const AuthProvider = ({ children }) => {
       throw new Error(errorMessage);
     }
   };
-  
+
+  const petRegister = async (name, species, birthDate, description, status, isVacinated, isCastrated, size, imageUrl ) => {
+    try {
+      await axios({
+        method: "post",
+      url: "http://localhost:3000/pets",
+      data: {
+        name: name,
+        species: species,
+        birthDate: birthDate,
+        description: description,
+        status: status,
+        isVacinated: isVacinated,
+        isCastrated: isCastrated,
+        size: size,
+        imageUrl: imageUrl
+      }});
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || "Cadastro falhou. Tente novamente.";
+      throw new Error(errorMessage);
+    }
+  };
+
     const handleLogout = () => {
       localStorage.removeItem("jwtToken");
       setIsLogged(false);
@@ -73,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
   
     return (
-      <AuthContext.Provider value={{ isLogged, userName, userId, userRole, handleLogout, login, register }}>
+      <AuthContext.Provider value={{ isLogged, userName, userId, userRole, handleLogout, login, register, petRegister }}>
         {children}
       </AuthContext.Provider>
     );

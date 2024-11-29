@@ -3,63 +3,42 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { Box, Button, Container, TextField, Typography, Alert, Grid2 } from "@mui/material";
 
-function SignUp() {
+function AddPet() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    role: "USER", // Valor padrão
-    phone: "",
-    address: {
-      street: "",
-      number: "",
-      neighborhood: "",
-      city: "",
-      state: "",
-      zipCode: "",
-      complement: "",
-    },
-  });
+    species: "",
+    birthDate: "",
+    description: "",
+    status: "AVAILABLE", // Valor padrão
+    isVacinated: "",
+    isCastrated: "",
+    size: "",
+    imageUrl: ""
+    },);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const { register } = useAuth();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name.startsWith("address.")) {
-      const key = name.split(".")[1];
-      setFormData((prev) => ({
-        ...prev,
-        address: { ...prev.address, [key]: value },
-      }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess(false);
 
-    if (formData.password !== formData.confirmPassword) {
-      setError("As senhas não coincidem.");
-      return;
-    }
-
     try {
       setSuccess(true);
-      setTimeout(() => navigate("/sign-in"), 2000); // Redireciona após 2 segundos
+      setTimeout(() => navigate("/add-pet"), 2000); // Redireciona após 2 segundos
       await register(
         formData.name,
-        formData.email,
-        formData.password,
-        formData.role,
-        formData.phone,
-        formData.address
+        formData.species,
+        formData.birthDate,
+        formData.description,
+        formData.status,
+        formData.isVacinated,
+        formData.isCastrated,
+        formData.size,
+        formData.imageUrl
       );
     } catch (err) {
       setError(
@@ -83,7 +62,7 @@ function SignUp() {
       >
         {/* Título */}
         <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
-          Cadastro
+          Cadastro de Pets
         </Typography>
 
         {/* Mensagens de erro e sucesso */}
@@ -100,7 +79,7 @@ function SignUp() {
 
         {/* Dados Pessoais */}
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Dados Pessoais
+          Dados do Pet
         </Typography>
         <Grid2 container spacing={2}>
           <Grid2 item xs={12} sm={6}>
@@ -115,10 +94,9 @@ function SignUp() {
           </Grid2>
           <Grid2 item xs={12} sm={6}>
             <TextField
-              label="E-mail"
-              name="email"
-              type="email"
-              value={formData.email}
+              label="Especie"
+              name="species"
+              value={formData.species}
               onChange={handleChange}
               fullWidth
               required
@@ -126,9 +104,9 @@ function SignUp() {
           </Grid2>
           <Grid2 item xs={12} sm={6}>
             <TextField
-              label="Telefone"
-              name="phone"
-              value={formData.phone}
+              label="Data de nascimento"
+              name="birthDate"
+              value={formData.birthDate}
               onChange={handleChange}
               fullWidth
               required
@@ -136,10 +114,9 @@ function SignUp() {
           </Grid2>
           <Grid2 item xs={12} sm={6}>
             <TextField
-              label="Senha"
-              name="password"
-              type="password"
-              value={formData.password}
+              label="Descrição"
+              name="description"
+              value={formData.description}
               onChange={handleChange}
               fullWidth
               required
@@ -147,27 +124,9 @@ function SignUp() {
           </Grid2>
           <Grid2 item xs={12} sm={6}>
             <TextField
-              label="Confirmar Senha"
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
-          </Grid2>
-        </Grid2>
-
-        {/* Endereço */}
-        <Typography variant="h6" sx={{ mt: 3, mb: 2 }}>
-          Endereço
-        </Typography>
-        <Grid2 container spacing={2}>
-          <Grid2 item xs={12}>
-            <TextField
-              label="Rua"
-              name="address.street"
-              value={formData.address.street}
+              label="Status"
+              name="status"
+              value={formData.status}
               onChange={handleChange}
               fullWidth
               required
@@ -175,9 +134,9 @@ function SignUp() {
           </Grid2>
           <Grid2 item xs={12} sm={6}>
             <TextField
-              label="Número"
-              name="address.number"
-              value={formData.address.number}
+              label="É vacinado?"
+              name="isVacinated"
+              value={formData.isVacinated}
               onChange={handleChange}
               fullWidth
               required
@@ -185,9 +144,9 @@ function SignUp() {
           </Grid2>
           <Grid2 item xs={12} sm={6}>
             <TextField
-              label="Bairro"
-              name="address.neighborhood"
-              value={formData.address.neighborhood}
+              label="É vacinado?"
+              name="isCastrated"
+              value={formData.isCastrated}
               onChange={handleChange}
               fullWidth
               required
@@ -195,43 +154,24 @@ function SignUp() {
           </Grid2>
           <Grid2 item xs={12} sm={6}>
             <TextField
-              label="Cidade"
-              name="address.city"
-              value={formData.address.city}
+              label="Tamanho"
+              name="size"
+              value={formData.size}
               onChange={handleChange}
               fullWidth
               required
             />
           </Grid2>
-          <Grid2 item xs={12} sm={6}>
+          {/* <Grid2 item xs={12} sm={6}>
             <TextField
-              label="Estado"
-              name="address.state"
-              value={formData.address.state}
+              label="Upload de imagem"
+              name="imageUrl"
+              value={formData.imageUrl}
               onChange={handleChange}
               fullWidth
               required
             />
-          </Grid2>
-          <Grid2 item xs={12} sm={6}>
-            <TextField
-              label="CEP"
-              name="address.zipCode"
-              value={formData.address.zipCode}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
-          </Grid2>
-          <Grid2 item xs={12}>
-            <TextField
-              label="Complemento"
-              name="address.complement"
-              value={formData.address.complement}
-              onChange={handleChange}
-              fullWidth
-            />
-          </Grid2>
+          </Grid2> */}
         </Grid2>
 
         {/* Botão de cadastro */}
@@ -249,4 +189,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default AddPet;

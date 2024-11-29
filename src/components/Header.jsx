@@ -42,7 +42,7 @@ function Header() {
                   }}>Pets</Button>
                 </Link>
                 {/* Configurar favoritos posteriormente */}
-                <Link to={"/pets"}>
+                <Link to={"/favorites"}>
                   <Button sx={{
                     color: "white",
                     "&:hover": {

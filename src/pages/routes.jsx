@@ -7,6 +7,7 @@ import Pets from './app/Pets';
 import PetDetails from './app/PetDetails';
 import AdoptionPage from './adoption'; 
 import Profile from './app/Profile'
+import Favorites from './app/Favorites';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: '/pets/:id', element: <PetDetails /> },
       { path: '/adoption', element: <AdoptionPage /> },
       { path: '/profile', element: <Profile /> },
+      { path: '/favorites', element: <Favorites /> },
     ],
   },
 ]);

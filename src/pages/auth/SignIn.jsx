@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { api } from "@/lib/axios";
 import { useAuth } from "../../contexts/AuthContext";
 
 
@@ -21,9 +21,9 @@ function SignIn() {
     }
 
     try {
-      const response = await axios({
+      const response = await api({
         method: "post",
-        url: "http://localhost:3000/login",
+        url: "/login",
         data: { email, password }
       });
 

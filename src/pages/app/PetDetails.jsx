@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "@/lib/axios";
+import { api } from "@/lib/axios";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -16,7 +16,12 @@ function PetDetail() {
   useEffect(() => {
     const fetchPet = async () => {
       try {
-        const response = await axios.get(`/pets/${id}`);
+        const token = localStorage.getItem("jwtToken");
+        const response = await api.get(`/pets/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setPet(response.data);
       } catch (error) {
         console.error("Erro ao buscar detalhes do pet:", error);
@@ -67,7 +72,7 @@ function PetDetail() {
         <CardMedia
           component="img"
           height="300"
-          image={pet.image || "https://via.placeholder.com/300"}
+          image={pet.imageUrl || "https://via.placeholder.com/300"}
           alt={pet.name}
           sx={{ borderRadius: "8px", marginBottom: "20px" }}
         />

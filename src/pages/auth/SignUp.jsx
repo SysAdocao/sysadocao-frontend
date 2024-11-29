@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { Box, Button, Container, TextField, Typography, Alert, Grid2 } from "@mui/material";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -69,164 +70,184 @@ function SignUp() {
       );
     }
   };
-
+  
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
-    >
-      <form
+    <Container maxWidth="md" sx={{ mt: 5 }}>
+      <Box
+        component="form"
         onSubmit={handleSubmit}
-        style={{ maxWidth: "600px", width: "100%" }}
+        sx={{
+          p: 4,
+          boxShadow: 3,
+          borderRadius: 2,
+          bgcolor: "background.paper",
+        }}
       >
-        <h1>Cadastro</h1>
+        {/* Título */}
+        <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
+          Cadastro
+        </Typography>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {/* Mensagens de erro e sucesso */}
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
         {success && (
-          <p style={{ color: "green" }}>
+          <Alert severity="success" sx={{ mb: 2 }}>
             Cadastro realizado com sucesso! Redirecionando...
-          </p>
+          </Alert>
         )}
 
         {/* Dados Pessoais */}
-        <div style={{ marginBottom: "20px" }}>
-          <label>Nome:</label>
-          <input
-            name="name"
-            type="text"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>E-mail:</label>
-          <input
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Telefone:</label>
-          <input
-            name="phone"
-            type="text"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Senha:</label>
-          <input
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Confirmar Senha:</label>
-          <input
-            name="confirmPassword"
-            type="password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Dados Pessoais
+        </Typography>
+        <Grid2 container spacing={2}>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="Nome"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="E-mail"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="Telefone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="Senha"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="Confirmar Senha"
+              name="confirmPassword"
+              type="password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+        </Grid2>
 
         {/* Endereço */}
-        <h3>Endereço</h3>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Rua:</label>
-          <input
-            name="address.street"
-            type="text"
-            value={formData.address.street}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Número:</label>
-          <input
-            name="address.number"
-            type="text"
-            value={formData.address.number}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Bairro:</label>
-          <input
-            name="address.neighborhood"
-            type="text"
-            value={formData.address.neighborhood}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Cidade:</label>
-          <input
-            name="address.city"
-            type="text"
-            value={formData.address.city}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Estado:</label>
-          <input
-            name="address.state"
-            type="text"
-            value={formData.address.state}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>CEP:</label>
-          <input
-            name="address.zipCode"
-            type="text"
-            value={formData.address.zipCode}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div style={{ marginBottom: "20px" }}>
-          <label>Complemento:</label>
-          <input
-            name="address.complement"
-            type="text"
-            value={formData.address.complement}
-            onChange={handleChange}
-          />
-        </div>
+        <Typography variant="h6" sx={{ mt: 3, mb: 2 }}>
+          Endereço
+        </Typography>
+        <Grid2 container spacing={2}>
+          <Grid2 item xs={12}>
+            <TextField
+              label="Rua"
+              name="address.street"
+              value={formData.address.street}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="Número"
+              name="address.number"
+              value={formData.address.number}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="Bairro"
+              name="address.neighborhood"
+              value={formData.address.neighborhood}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="Cidade"
+              name="address.city"
+              value={formData.address.city}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="Estado"
+              name="address.state"
+              value={formData.address.state}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12} sm={6}>
+            <TextField
+              label="CEP"
+              name="address.zipCode"
+              value={formData.address.zipCode}
+              onChange={handleChange}
+              fullWidth
+              required
+            />
+          </Grid2>
+          <Grid2 item xs={12}>
+            <TextField
+              label="Complemento"
+              name="address.complement"
+              value={formData.address.complement}
+              onChange={handleChange}
+              fullWidth
+            />
+          </Grid2>
+        </Grid2>
 
-        <button
+        {/* Botão de cadastro */}
+        <Button
           type="submit"
-          style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: "#007BFF",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 3 }}
         >
           Cadastrar
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Box>
+    </Container>
   );
 }
 

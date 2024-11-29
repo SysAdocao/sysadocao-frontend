@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "@/lib/axios";
 import { useAuth } from "../../contexts/AuthContext";
+import { Box, Button, TextField, Typography, Container, Alert } from "@mui/material"
 
 
 function SignIn() {
@@ -42,64 +43,71 @@ function SignIn() {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px", height: "" }}>
-      <form onSubmit={handleLogin} style={{ maxWidth: "400px", width: "100%" }}>
-        <h1>Login</h1>
+    <Container maxWidth="sm">
+      <Box
+        component="form"
+        onSubmit={handleLogin}
+        sx={{
+          mt: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          p: 3,
+          borderRadius: 2,
+          boxShadow: 3,
+          bgcolor: "background.paper",
+        }}
+      >
+        {/* Título */}
+        <Typography variant="h4" component="h1" sx={{ mb: 3 }}>
+          Login
+        </Typography>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {/* Mensagem de erro */}
+        {error && (
+          <Alert severity="error" sx={{ mb: 2, width: "100%" }}>
+            {error}
+          </Alert>
+        )}
 
-        <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="email">E-mail:</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginTop: "5px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-            }}
-            required
-          />
-        </div>
+        {/* Campo de e-mail */}
+        <TextField
+          id="email"
+          label="E-mail"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          fullWidth
+          required
+          margin="normal"
+          variant="outlined"
+        />
 
-        <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="password">Senha:</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginTop: "5px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-            }}
-            required
-          />
-        </div>
+        {/* Campo de senha */}
+        <TextField
+          id="password"
+          label="Senha"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          fullWidth
+          required
+          margin="normal"
+          variant="outlined"
+        />
 
-        <button
+        {/* Botão de login */}
+        <Button
           type="submit"
-          style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: "#007BFF",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
         >
           Entrar
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Box>
+    </Container>
   );
 }
 

@@ -49,7 +49,6 @@ function SignUp() {
       setError("As senhas não coincidem.");
       return;
     }
-
     try {
       await register(
         formData.name,

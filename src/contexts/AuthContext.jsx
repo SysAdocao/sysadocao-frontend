@@ -54,12 +54,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const petRegister = async (name, species, birthDate, description, status, isVacinated, isCastrated, size, imageUrl, token ) => {
+  const petRegister = async (name, species, birthDate, description, status, isVacinated, isCastrated, size, imageUrl) => {
+    const token = localStorage.getItem("jwtToken");
     try {
+      await api.get("/validate-token", { 
+        headers: { Authorization: `Bearer ${token}` },
+      });
+        setIsLogged(true);
+      } catch {
+        setIsLogged(false);
+        localStorage.removeItem("jwtToken");
+      }  
       await axios({
         method: "post",
-      url: "http://localhost:3000/pets",
-      data: {
+        url: "http://localhost:3000/pets",
+        data: {
         name: name,
         species: species,
         birthDate: birthDate,
@@ -69,11 +78,11 @@ export const AuthProvider = ({ children }) => {
         isCastrated: isCastrated,
         size: size,
         imageUrl: imageUrl
-      }});
-    } catch (error) {
-      const errorMessage = error.response?.data?.message || "Cadastro falhou. Tente novamente.";
-      throw new Error(errorMessage);
-    }
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
   };
 
     const handleLogout = () => {

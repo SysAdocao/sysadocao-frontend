@@ -52,6 +52,8 @@ function AddPet() {
         formData.size,
         formData.imageUrl
       );
+
+      
     } catch (err) {
       setError(
         err.response?.data?.error ||

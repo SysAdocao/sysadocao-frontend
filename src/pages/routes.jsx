@@ -8,6 +8,8 @@ import PetDetails from './app/PetDetails';
 import AdoptionPage from './adoption'; 
 import Profile from './app/Profile'
 import Favorites from './app/Favorites';
+import AddPet from './auth/AddPet';
+
 
 export const router = createBrowserRouter([
   {

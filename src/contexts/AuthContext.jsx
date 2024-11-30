@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "@/lib/axios";
-import axios, { Axios } from "axios";
 
 const AuthContext = createContext();
 
@@ -35,18 +34,14 @@ export const AuthProvider = ({ children }) => {
   
     const register = async (name, email, password, role, phone, address) => {
     try {
-      await axios({
-        method: "post",
-        url: "http://localhost:3000/users",
-        data: {
-          name: name,
-          email: email,
-          password: password,
-          role: role,
-          phone: phone,
-          address: address,
-        },
-      });
+      await api.post("/users", {
+        name: name,
+        email: email,
+        password: password,
+        role: role,
+        phone: phone,
+        address: address,
+      },);
     } catch (error) {
       const errorMessage =
         error.response?.data?.message || "Cadastro falhou. Tente novamente.";
@@ -54,21 +49,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const petRegister = async (name, species, birthDate, description, status, isVacinated, isCastrated, size, imageUrl) => {
-    const token = localStorage.getItem("jwtToken");
+  const petRegister = async (name, species, birthDate, description, status, isVacinated, isCastrated, size, imageUrl ) => {
     try {
-      await api.get("/validate-token", { 
-        headers: { Authorization: `Bearer ${token}` },
-      });
-        setIsLogged(true);
-      } catch {
-        setIsLogged(false);
-        localStorage.removeItem("jwtToken");
-      }  
-      await axios({
-        method: "post",
-        url: "http://localhost:3000/pets",
-        data: {
+      await api.post("/pets",
+      {
         name: name,
         species: species,
         birthDate: birthDate,
@@ -78,11 +62,11 @@ export const AuthProvider = ({ children }) => {
         isCastrated: isCastrated,
         size: size,
         imageUrl: imageUrl
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || "Cadastro falhou. Tente novamente.";
+      throw new Error(errorMessage);
+    }
   };
 
     const handleLogout = () => {

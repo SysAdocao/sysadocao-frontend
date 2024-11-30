@@ -9,13 +9,24 @@ import {
   Box,
 } from '@mui/material';
 
-const SIZE_OPTIONS = ["Pequeno", "Médio", "Grande"];
+const SIZE_OPTIONS = [
+  { value: 'SMALL', label: 'Pequeno' },
+  { value: 'MEDIUM', label: 'Médio' },
+  { value: 'BIG', label: 'Grande' },
+];
+const BOOLEAN_OPTIONS = [
+  { value: '', label: 'Todos' },
+  { value: "true", label: 'Sim' },
+  { value: "false", label: 'Não' },
+];
 
 const PetSearchForm = ({ onSearch }) => {
   const [filters, setFilters] = useState({
     name: "",
     species: "",
     size: "",
+    isVacinated: "",
+    isCastrated: "",
   });
 
   const handleInputChange = (e) => {
@@ -36,6 +47,8 @@ const PetSearchForm = ({ onSearch }) => {
       name: "",
       species: "",
       size: "",
+      isVacinated: "",
+      isCastrated: "",
     });
     onSearch({}); // Reseta os filtros no componente pai
   };
@@ -45,6 +58,7 @@ const PetSearchForm = ({ onSearch }) => {
       component="form"
       onSubmit={handleSubmit}
       sx={{ display: "flex", flexDirection: "row", gap: 2, paddingY: 1 }}
+      flexWrap={ { xs: 'wrap', md: 'nowrap' } }
     >
       <TextField
         label="Nome"
@@ -73,12 +87,47 @@ const PetSearchForm = ({ onSearch }) => {
         >
           <MenuItem value="">Todos</MenuItem>
           {SIZE_OPTIONS.map((size) => (
-            <MenuItem key={size} value={size}>
-              {size}
+            <MenuItem key={size.value} value={size.value}>
+              {size.label}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel id="isVacinated-label">Vacinado</InputLabel>
+        <Select
+          labelId="isVacinated-label"
+          label="Vacinado"
+          name="isVacinated"
+          value={filters.isVacinated}
+          onChange={handleInputChange}
+        >
+          {BOOLEAN_OPTIONS.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel id="isCastrated-label">Castrado</InputLabel>
+        <Select
+          labelId="isCastrated-label"
+          label="Castrado"
+          name="isCastrated"
+          value={filters.isCastrated}
+          onChange={handleInputChange}
+        >
+          {BOOLEAN_OPTIONS.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}>
         <Button type="submit" variant="contained" color="primary">
           Buscar

@@ -1,0 +1,266 @@
+body {
+    font-family: 'Poppins', sans-serif; /* Fonte padronizada */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #ffffff; /* Fundo branco */
+    color: #333; /* Cor padrão do texto */
+}
+
+/* Estilo para todas as seções para manter a consistência */
+section {
+    font-family: 'Poppins', sans-serif; /* Fonte padronizada */
+    color: #333; /* Cor padrão */
+}
+
+/* Cabeçalho */
+header {
+    background-color: #3D66CC; /* Azul */
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img {
+    height: 50px;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #f4f4f4; /* Cor mais clara para o efeito hover */
+}
+
+/* Seção de Introdução */
+#intro {
+    display: flex;
+    padding: 40px 60px;
+    background-color: #f4f4f4;
+    align-items: center;
+}
+
+#intro .intro-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.pet-image-container {
+    margin-left: 20px;
+}
+
+.pet-image {
+    width: 460px;
+    height: 500px;
+    border-radius: 50%; /* Faz a imagem circular */
+    /* Removendo a borda */
+    border: none;
+    object-fit: cover; /* Ajusta a imagem para preencher o círculo */
+}
+
+#intro h1 {
+    color: #3D66CC; /* Azul */
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+#intro p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+#intro .highlight {
+    color: #3D66CC; /* Azul */
+    font-weight: 600; /* Destaque */
+}
+
+#intro button {
+    background-color: #3D66CC; /* Azul */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+#intro button:hover {
+    background-color: #2a4d91; /* Azul mais escuro */
+}
+
+/* Títulos em azul */
+h1, h2 {
+    color: #3D66CC; /* Azul */
+}
+
+/* Subtítulos em preto */
+h3, h4, h5, h6, p {
+    color: #333; /* Preto */
+}
+
+/* Estilo para a seção Sobre */
+#sobre {
+    padding: 40px 20px;
+    background-color: #f4f4f4; /* Fundo suave */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #sobre h2 {
+    color: #3D66CC; /* Cor do título */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .about-content {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .about-text {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-video {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .about-video iframe {
+    border-radius: 8px;
+  }
+  
+/* Seções de Benefícios, Como Funciona e Contato */
+#sobre, #beneficios, #como-funciona, #contato {
+    padding: 40px 20px;
+}
+
+.benefits {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.benefit {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.benefit:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#como-funciona {
+    padding: 40px 20px;
+    background-color: #f4f4f4; /* Azul claro para um fundo sutil */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidade */
+    text-align: center;
+}
+
+#como-funciona h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #3D66CC; /* Azul para o título */
+    font-weight: 600;
+}
+
+#como-funciona ol {
+    list-style-type: none; /* Remove a numeração padrão */
+    padding: 0;
+    margin: 0;
+}
+
+#como-funciona li {
+    background-color: #ffffff; /* Fundo branco para os itens */
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre ícone e texto */
+}
+
+#como-funciona li::before {
+    content: '✓'; /* Ícone de marca de verificação */
+    color: #3D66CC; /* Cor azul */
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#como-funciona li p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Adicionando animação para os itens */
+#como-funciona li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+form input, form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #3D66CC; /* Azul */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #2a4d91; /* Azul mais escuro */
+}
+
+footer {
+    background-color: #3D66CC;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}

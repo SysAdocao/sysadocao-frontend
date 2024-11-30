@@ -10,6 +10,7 @@ import Profile from './app/Profile'
 import Favorites from './app/Favorites';
 import AddPet from './auth/AddPet';
 
+
 export const router = createBrowserRouter([
   {
     path: '/',

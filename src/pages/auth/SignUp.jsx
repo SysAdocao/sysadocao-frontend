@@ -51,15 +51,15 @@ function SignUp() {
     }
 
     try {
-      setSuccess(true);
-      setTimeout(() => navigate("/sign-in"), 2000); // Redireciona após 2 segundos
       await register(
         formData.name,
         formData.email,
         formData.password,
         formData.role,
         formData.phone,
-        formData.address
+        formData.address,
+        formData.Adoption,
+        formData.Favorite
       );
     } catch (err) {
       setError(
@@ -67,6 +67,8 @@ function SignUp() {
           "Erro ao realizar cadastro. Tente novamente mais tarde."
       );
     }
+    setSuccess(true);
+    setTimeout(() => navigate("/sign-in"), 2000); // Redireciona após 2 segundos
   };
   
   return (

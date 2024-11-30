@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
           password: password,
           role: role,
           phone: phone,
-          address: address
+          address: address,
         },
       });
     } catch (error) {
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const petRegister = async (name, species, birthDate, description, status, isVacinated, isCastrated, size, imageUrl ) => {
+  const petRegister = async (name, species, birthDate, description, status, isVacinated, isCastrated, size, imageUrl, token ) => {
     try {
       await axios({
         method: "post",

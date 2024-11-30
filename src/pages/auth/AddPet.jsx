@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { Box, Button, Container, TextField, Typography, Alert, Grid2 } from "@mui/material";
+import { FormControl, Select, Box, Button, Container, TextField, Typography, Alert, Grid2 } from "@mui/material";
+import { InputLabel, MenuItem } from "@mui/material";
 
 function AddPet() {
   const [formData, setFormData] = useState({
@@ -10,16 +11,29 @@ function AddPet() {
     birthDate: "",
     description: "",
     status: "AVAILABLE", // Valor padrão
-    isVacinated: "",
-    isCastrated: "",
-    size: "",
+    isVacinated: "false",
+    isCastrated: "false",
+    size: "MEDIUM",
     imageUrl: ""
     },);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
-  const { register } = useAuth();
+  const { petRegister } = useAuth();
+
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name.startsWith("address.")) {
+      const key = name.split(".")[1];
+      setFormData((prev) => ({
+        ...prev,
+        address: { ...prev.address, [key]: value },
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +41,7 @@ function AddPet() {
     setSuccess(false);
 
     try {
-      setSuccess(true);
-      setTimeout(() => navigate("/add-pet"), 2000); // Redireciona após 2 segundos
-      await register(
+      await petRegister(
         formData.name,
         formData.species,
         formData.birthDate,
@@ -46,6 +58,7 @@ function AddPet() {
           "Erro ao realizar cadastro. Tente novamente mais tarde."
       );
     }
+    setSuccess(true);
   };
   
   return (
@@ -73,7 +86,7 @@ function AddPet() {
         )}
         {success && (
           <Alert severity="success" sx={{ mb: 2 }}>
-            Cadastro realizado com sucesso! Redirecionando...
+            Cadastro realizado com sucesso!
           </Alert>
         )}
 
@@ -123,44 +136,64 @@ function AddPet() {
             />
           </Grid2>
           <Grid2 item xs={12} sm={6}>
-            <TextField
-              label="Status"
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
+            <FormControl fullWidth required>
+              <InputLabel id="status-label">Status</InputLabel>
+              <Select
+                labelId="status-label"
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+              >
+                <MenuItem value="AVAILABLE">Disponível</MenuItem>
+                <MenuItem value="ADOPTED">Adotado</MenuItem>
+              </Select>
+            </FormControl>
           </Grid2>
           <Grid2 item xs={12} sm={6}>
-            <TextField
-              label="É vacinado?"
-              name="isVacinated"
-              value={formData.isVacinated}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
+            <FormControl fullWidth required>
+              <InputLabel id="isVacinated-label">Vacinado</InputLabel>
+              <Select
+                labelId="isVacinated-label"
+                name="isVacinated"
+                value={formData.isVacinated}
+                onChange={handleChange}
+                style={{ width: "100%"}}
+              >
+                <MenuItem value="true">Verdairo</MenuItem>
+                <MenuItem value="false">Falso</MenuItem>
+              </Select>
+            </FormControl>
           </Grid2>
           <Grid2 item xs={12} sm={6}>
-            <TextField
-              label="É vacinado?"
-              name="isCastrated"
-              value={formData.isCastrated}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
+          <FormControl fullWidth required>
+              <InputLabel id="isCastrated-label">Castrado</InputLabel>
+              <Select
+                labelId="isCastrated-label"
+                name="isCastrated"
+                value={formData.isCastrated}
+                onChange={handleChange}
+                style={{ width: "100%"}}
+              >
+                <MenuItem value="true">Verdadeiro</MenuItem>
+                <MenuItem value="false">Falso</MenuItem>
+              </Select>
+            </FormControl>
           </Grid2>
           <Grid2 item xs={12} sm={6}>
-            <TextField
-              label="Tamanho"
-              name="size"
-              value={formData.size}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
+            <FormControl fullWidth required>
+              <InputLabel id="size-label">Tamanho</InputLabel>
+              <Select
+                labelId="size-label"
+                name="size"
+                value={formData.size}
+                onChange={handleChange}
+                style={{ width: "100%"}}
+              >
+                <MenuItem value="SMALL">Pequeno</MenuItem>
+                <MenuItem value="MEDIUM">Médio</MenuItem>
+                <MenuItem value="BIG">Grande</MenuItem>
+              </Select>
+            </FormControl>
           </Grid2>
           {/* <Grid2 item xs={12} sm={6}>
             <TextField

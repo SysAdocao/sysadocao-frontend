@@ -18,7 +18,7 @@ function Header() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar component="nav" sx={{ py: 1, px: 6 }}>
-        <Toolbar>
+        <Toolbar sx={{ display: "flex", flexDirection: {xs: "column", sm:"row"} }}>
           <Box sx={{ flexGrow: 1 }}>
             <Link to="/">
               <img src={Logo} alt="Logo SysAdoção" />
@@ -28,7 +28,7 @@ function Header() {
             sx={{
               alignItems: "center",
               gap: 1,
-              display: { xs: "none", sm: "flex" }
+              display: { sm: "flex" }
             }}
           >
             {isLogged ? (

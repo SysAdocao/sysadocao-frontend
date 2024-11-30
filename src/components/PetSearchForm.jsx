@@ -58,6 +58,7 @@ const PetSearchForm = ({ onSearch }) => {
       component="form"
       onSubmit={handleSubmit}
       sx={{ display: "flex", flexDirection: "row", gap: 2, paddingY: 1 }}
+      flexWrap={ { xs: 'wrap', md: 'nowrap' } }
     >
       <TextField
         label="Nome"

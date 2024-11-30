@@ -1,14 +1,19 @@
-// src/pages/adoption/AdoptionForm.jsx
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, FormControlLabel, Checkbox, Grid } from '@mui/material';
+import { Box, Button, TextField, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 
 function AdoptionForm({ isLoggedIn }) {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const petId = params.get('petId');
+
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [successMessage, setSuccessMessage] = useState('');
 
   const onSubmit = (data) => {
-    console.log(data); 
+    console.log('Pet ID:', petId); // Exibindo o ID do pet
+    console.log(data);
     setSuccessMessage('Adoção realizada com sucesso!');
   };
 
@@ -157,20 +162,25 @@ function AdoptionForm({ isLoggedIn }) {
               sx={{ mt: 2 }}
             />
             {errors.terms && (
-              <Typography color="error" sx={{ mt: 1 }}>
+              <Typography color="error" variant="body2" sx={{ mt: 1 }}>
                 {errors.terms.message}
               </Typography>
             )}
           </>
         )}
-
-        <Button type="submit" variant="contained" color="primary" sx={{ mt: 3 }}>
-          Confirmar Adoção
+        
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 3 }}
+        >
+          Enviar Solicitação
         </Button>
       </form>
-
       {successMessage && (
-        <Typography color="success.main" sx={{ mt: 3 }}>
+        <Typography color="primary" variant="h6" sx={{ mt: 3 }}>
           {successMessage}
         </Typography>
       )}

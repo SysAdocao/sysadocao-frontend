@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react"; 
+import { useParams, useNavigate } from "react-router-dom";
 import { api } from "@/lib/axios";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,11 +7,13 @@ import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button"; // Importa o botão do Material-UI
 
 function PetDetail() {
   const { id } = useParams();
   const [pet, setPet] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Hook para navegação
 
   useEffect(() => {
     const fetchPet = async () => {
@@ -94,6 +96,17 @@ function PetDetail() {
           <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
             <strong>Descrição:</strong> {pet.description}
           </Typography>
+          {/* Botão para navegação */}
+          {pet.status === "AVAILABLE" && (
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ mt: 3 }}
+              onClick={() => navigate('/adoption')}
+            >
+              Adote este Pet
+            </Button>
+          )}
         </CardContent>
       </Card>
     </Container>

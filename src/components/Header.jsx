@@ -9,7 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 
 import Logo from "../assets/logo.png";
-import AvatarMenu from "./MenuDropdown";
+import AvatarMenu from "./AvatarMenu";
 
 function Header() {
   const { isLogged } = useAuth();
